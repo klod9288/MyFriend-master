@@ -1,9 +1,11 @@
 package appewtc.masterung.myfriend;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +20,10 @@ public class SignUp extends AppCompatActivity {
     private EditText nameEditText, userEditText, passEditText;
     private ImageView imageView;
     private Button button;
-    private String nameString, userString, passString;
+    private String nameString, userString, passString,pathImageString,nameImageString;
+
     private Uri uri;
+
 
 
     @Override
@@ -60,6 +64,22 @@ public class SignUp extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            //Find image path
+            String[] strings = new String[]{MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(uri,strings,null,null,null);
+            if (cursor !=null) {
+                cursor.moveToFirst();
+                int index = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                pathImageString = cursor.getString(index);
+            } else {
+                pathImageString = uri.getPath();
+            }
+            Log.d("19feb1","pathImage ==>" + pathImageString);
+
+
+
+
 
         }   //if
 
