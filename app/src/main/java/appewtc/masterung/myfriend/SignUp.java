@@ -23,6 +23,7 @@ public class SignUp extends AppCompatActivity {
     private String nameString, userString, passString,pathImageString,nameImageString;
 
     private Uri uri;
+    private boolean aBoolean = true;
 
 
 
@@ -49,6 +50,8 @@ public class SignUp extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
+
+            aBoolean = false;
 
             //Success Choose Image
             Log.d("18febV1", "Result OK");
@@ -120,6 +123,11 @@ public class SignUp extends AppCompatActivity {
                     MyAlert myAlert = new MyAlert(SignUp.this);
                     myAlert.myDialog("Have Space", "Please Fill All Every Blank");
 
+                } else if (aBoolean) {
+                    //Non Choose Image
+                    MyAlert myAlert = new MyAlert(SignUp.this);
+                    myAlert.myDialog("ยังไม่ได้เลือกรูป","โปรดเลือกรูปครับ");
+                } else {
                 }
 
             }   // onClick
